@@ -27,15 +27,7 @@ library(viridis)
 #only sites <= 50 degrees lat
 #only species/stations with at least 5 years data
 #only species with at least 15 station/years data
-data_p <- readRDS(paste0(dir, 'Data/MAPS_data/MAPS-data.rds'))
-
-#without station-level attributes
-data <- data_p %>%
-  dplyr::select(-c(lat, lng))
-#just station-level attributes
-data_sll <- data_p %>%
-  dplyr::select(station, lat, lng) %>%
-  dplyr::distinct()
+data <- readRDS(paste0(dir, 'Data/MAPS_data/MAPS-data.rds'))
 
 #gr data
 gr_mid_master <- readRDS(paste0(dir, 'Data/environment/processed/',
@@ -47,7 +39,7 @@ gr_mid_master <- readRDS(paste0(dir, 'Data/environment/processed/',
 #calculate mean gr and mean n_pix at each site
 gr_df <- gr_mid_master %>%
   dplyr::group_by(station) %>%
-  dplyr::summarize(mn_site_gr = mean(gr_mid),
+  dplyr::summarize(mn_site_gr = mean(gr_mn),
                    mn_site_np = median(n_pix)) %>%
   dplyr::filter(mn_site_gr >= 60, #mean day March 1 or later
                 mn_site_np >= 150) #at least 150 pixels on avg
@@ -63,19 +55,18 @@ gr_mid_master2 <- gr_mid_master %>%
 #remove extreme outliers green-up  
 gr_mid_master3 <- gr_mid_master2 %>%
   dplyr::group_by(station) %>%
-  dplyr::summarize(MAD = mad(gr_mid),
-            med = median(gr_mid)) %>%
+  dplyr::summarize(MAD = mad(gr_mn),
+            med = median(gr_mn)) %>%
   dplyr::mutate(UL = med + MAD * 6,
          LL = med - MAD * 6) %>%
   dplyr::left_join(gr_mid_master2, by = 'station') %>%
-  dplyr::filter(gr_mid < UL & gr_mid > LL)
+  dplyr::filter(gr_mn < UL & gr_mn > LL)
 
 #join MAPS and gr data
 tdata <- dplyr::full_join(data, gr_mid_master3, by = c('year', 'station')) %>%
-  dplyr::full_join(data_sll, by = c('station')) %>%
   dplyr::filter(!is.na(sci_name)) %>%
   dplyr::group_by(sci_name, station) %>%
-  dplyr::mutate(sc_gr_mid = scale(gr_mid, scale = FALSE)[,1],
+  dplyr::mutate(sc_gr_mid = scale(gr_mn, scale = FALSE)[,1],
                 sc_juv = scale(juv_meanday, scale = FALSE)[,1]) %>%
   dplyr::ungroup() %>% 
   dplyr::group_by(sci_name) %>%

@@ -33,8 +33,8 @@ sp_id_df <- dplyr::distinct(tdata, st_id, .keep_all = TRUE) %>%
 #center gr each species
 tdata2 <- tdata %>%
   dplyr::group_by(sci_name) %>%
-  mutate(sc_gr_sp = scale(gr_mid, scale = FALSE)[,1],
-         mn_gr_sp = mean(gr_mid)) %>%
+  mutate(sc_gr_sp = scale(gr_mn, scale = FALSE)[,1],
+         mn_gr_sp = mean(gr_mn)) %>%
   ungroup()
 
 
