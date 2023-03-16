@@ -7,8 +7,8 @@
 # set dir -----------------------------------------------------------------
 
 dir <- 'XXXX'
-run_date <- '2022-04-08'
-fl_sens_run_date <- '2022-04-08'
+run_date <- '2023-03-16'
+fl_sens_run_date <- '2023-03-16'
 pc_run_date <- '2022-04-08'
 
 #create output dir if it doesn't exist
@@ -28,7 +28,7 @@ library(RColorBrewer)
 # load and process data ------------------------------------------------------------
 
 # #load fl sens model fit
-fl_sens_fit <- readRDS(paste0(dir, 'Results/juv-gr-',
+fl_sens_fit <- readRDS(paste0(dir, 'Results/juv-gr-unc-',
                               fl_sens_run_date, '/juv-gr-fit-', 
                               fl_sens_run_date, '.rds'))
 

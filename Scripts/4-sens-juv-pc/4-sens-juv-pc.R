@@ -7,8 +7,8 @@
 # set dir -----------------------------------------------------------------
 
 dir <- 'XXXX'
-run_date <- '2022-09-27'
-fl_sens_run_date <- '2022-04-08'
+run_date <- '2023-03-16'
+fl_sens_run_date <- '2023-03-16'
 pc_run_date <- '2022-04-08'
 phylo_date <- '2022-09-15'
 
@@ -37,7 +37,7 @@ tdata <- readRDS(paste0(dir, '/Results/pro-PC-', pc_run_date,
 mig_dis <- readRDS(paste0(dir, '/Data/mig_distance.rds'))
 
 #read in juv sens
-t2 <- readRDS(paste0(dir, '/Results/juv-gr-', 
+t2 <- readRDS(paste0(dir, '/Results/juv-gr-unc-', 
                      fl_sens_run_date, '/juv-gr-fit-', 
                      fl_sens_run_date, '.rds'))
 
@@ -62,8 +62,8 @@ tmrg <- dplyr::distinct(tdata, sci_name, sp_id) %>%
   dplyr::select(sci_name, sp_id, juv_sens, juv_sens_sd, dis, mjd)
 
 #sens of mig species
-median(dplyr::filter(tmrg, dis > 0)$juv_sens)
-median(dplyr::filter(tmrg, dis == 0)$juv_sens)
+mean(dplyr::filter(tmrg, dis > 0)$juv_sens)
+mean(dplyr::filter(tmrg, dis == 0)$juv_sens)
 
 
 # PCA ---------------------------------------------------------------------

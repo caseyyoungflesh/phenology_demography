@@ -7,7 +7,7 @@
 # set dir -----------------------------------------------------------------
 
 dir <- 'XXXX'
-run_date <- '2022-04-08'
+run_date <- '2023-03-16'
 pc_run_date <- '2022-04-08'
 
 
@@ -43,7 +43,8 @@ tdata2 <- tdata %>%
 DATA <- list(N = NROW(tdata2),
              Nst = length(unique(tdata2$st_id)),
              Nsp = length(unique(tdata2$sp_id)),
-             juv = tdata2$juv_meanday,
+             juv_obs = tdata2$juv_meanday,
+             juv_sd = tdata2$juv_sem,
              st_id = tdata2$st_id, #id for each species/station
              sp_id = tdata2$sp_id,
              sp_id2 = sp_id_df$sp_id,
@@ -57,7 +58,7 @@ DELTA <- 0.98
 TREE_DEPTH <- 12
 STEP_SIZE <- 0.05
 CHAINS <- 4
-ITER <- 5000
+ITER <- 7000
 
 fit <- rstan::stan(paste0(dir, 'Scripts/Model_files/3-juv-gr.stan'),
                    data = DATA,
@@ -75,9 +76,7 @@ fit <- rstan::stan(paste0(dir, 'Scripts/Model_files/3-juv-gr.stan'),
                             'mmb',
                             'sma',
                             'smb',
-                            'nu',
-                            'lambda',
-                            'kappa',
+                            'juv',
                             'y_rep'),
                    control = list(adapt_delta = DELTA,
                                   max_treedepth = TREE_DEPTH,
@@ -92,7 +91,7 @@ MCMCvis::MCMCdiag(fit,
                   round = 4,
                   file_name = paste0('juv-gr-results-', run_date),
                   dir = paste0(dir, 'Results'),
-                  mkdir = paste0('juv-gr-', run_date),
+                  mkdir = paste0('juv-gr-unc-', run_date),
                   probs = c(0.055, 0.5, 0.945),
                   pg0 = TRUE,
                   save_obj = TRUE,
@@ -111,7 +110,7 @@ MCMCvis::MCMCdiag(fit,
 # PPC ---------------------------------------------------------------------
 
 #figure dir
-fig_dir <- paste0(dir, 'Results/juv-gr-', run_date, '/')
+fig_dir <- paste0(dir, 'Results/juv-gr-unc-', run_date, '/')
 
 #posterior predictive check
 y_val <- DATA$juv
