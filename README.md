@@ -2,13 +2,13 @@
 
 ZENODO HERE
 
-Code for Youngflesh et al.
+Code for Youngflesh et al. In Press *PNAS*
 
 This repository contains code to assess the demographic consequences of phenological dynamics in North American birds.
 
 **Associated publications:**
 
-Youngflesh, C, GA Montgomery, JF Saracco, DAW Miller, RP Guralnick, AH Hurlbert, RB Siegel, R LaFrance, MW Tingley. Demographic consequences of phenological asynchrony for North American songbirds.
+Youngflesh, C, GA Montgomery, JF Saracco, DAW Miller, RP Guralnick, AH Hurlbert, RB Siegel, R LaFrance, MW Tingley. Demographic consequences of phenological asynchrony for North American songbirds. In Press at *__PNAS__*
 
 
 **Repository structure:**
