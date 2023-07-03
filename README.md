@@ -10,7 +10,7 @@ This repository contains code to assess the demographic consequences of phenolog
 
 **Associated publications:**
 
-Youngflesh, C, GA Montgomery, JF Saracco, DAW Miller, RP Guralnick, AH Hurlbert, RB Siegel, R LaFrance, MW Tingley. Demographic consequences of phenological asynchrony for North American songbirds. In Press at *__PNAS__*
+Youngflesh, C, GA Montgomery, JF Saracco, DAW Miller, RP Guralnick, AH Hurlbert, RB Siegel, R LaFrance, MW Tingley. [Demographic consequences of phenological asynchrony for North American songbirds.](https://www.pnas.org/doi/10.1073/pnas.2221961120) *__PNAS__* 120:e2221961120.
 
 
 **Repository structure:**
