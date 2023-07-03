@@ -4,7 +4,7 @@
 [![DOI](https://zenodo.org/badge/575464073.svg)](https://zenodo.org/badge/latestdoi/575464073)
 
 
-Code for Youngflesh et al. In Press *PNAS*
+Code for Youngflesh et al. 2023 *PNAS*
 
 This repository contains code to assess the demographic consequences of phenological dynamics in North American birds.
 
